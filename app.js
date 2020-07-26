@@ -10,7 +10,6 @@ const session = require('express-session');
 const flash = require('connect-flash');
 
 require('./passport/local-auth');
-
 const connectDb = require('./dbConfig');
 const Clientes = require('./models/Clientes');
 const Users = require('./models/Users');
@@ -25,17 +24,22 @@ app.set('views', './views');
 
 // Intermediarios
 app.use(morgan('dev'));
-app.use(flash());
-app.use(express.urlencoded({extended: false}));
 
+
+app.use(express.urlencoded({extended: false}));
 app.use(session({
     secret: 'hola2secreto',
     resave: false,
     saveUninitialized: false
   }));
-  
+  app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());
+  
+  app.use((req,res,next) => {
+    app.locals.mensajederegistro=  req.flash('Mensaje de Registro');
+    next();
+  });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());

@@ -12,7 +12,7 @@ schema2.methods.encryptPassword =  (password) => {
 
 //compara la contraseña introducida por el usuario y returna un true o false
 schema2.methods.comparePassword = function(password){
-    bcrypt.compareSync(passwoord, this.passwoord)
+    bcrypt.compareSync(password, this.password)
 }
 
 const Users = mongoose.model('Users', schema2);
