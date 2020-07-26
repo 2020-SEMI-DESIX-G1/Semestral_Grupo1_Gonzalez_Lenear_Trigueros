@@ -7,6 +7,7 @@ const app = express();
 const morgan = require('morgan');
 const passport = require('passport');
 const session = require('express-session');
+const flash = require('connect-flash');
 
 require('./passport/local-auth');
 
@@ -24,6 +25,7 @@ app.set('views', './views');
 
 // Intermediarios
 app.use(morgan('dev'));
+app.use(flash());
 app.use(express.urlencoded({extended: false}));
 
 app.use(session({
@@ -60,14 +62,14 @@ app.get('/Bienvenido/:id', async (req, res) => {
     }
 });
 
-app.post('/signup', async (req, res) => {
-    const { email, password } = req.body;
-    await Users.create({ email, password });
+// app.post('/signup', async (req, res) => {
+//     const { email, password } = req.body;
+//     await Users.create({ email, password });
 
-    const users = await Users.find().select('nombre ');
-    console.log(users[0]._id);
-    res.send('recibido');
-});
+//     const users = await Users.find().select('nombre ');
+//     console.log(users[0]._id);
+//     res.send('recibido');
+// });
 
 //Agregar Nombre 
 app.post('/Inicio', async (req, res) => {

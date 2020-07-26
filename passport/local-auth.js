@@ -20,9 +20,10 @@ passport.use('local-signup', new LocalStrategy({
     //el modulo recibe los datos y crea un nuevo usuario
 }, async (req, email, password, done) => {
     const user = await User.findOne({'email': email})
-    console.log(user)
-    if(user) {
-      return done(null, false, req.flash('signupMessage', 'The Email is already Taken.'));
+    console.log(user);
+
+    if(user){
+      return done(null, false, req.flash('Mensaje de Registro', 'El Email ya a sido registrado.'));
     } else {
       const newUser = new User();
       newUser.email = email;
