@@ -5,6 +5,8 @@ const schema = new mongoose.Schema({
   direccion: { type: String },
 });
 
+
+
 const Clientes = mongoose.model('Clientes', schema);
 
 module.exports = Clientes;
