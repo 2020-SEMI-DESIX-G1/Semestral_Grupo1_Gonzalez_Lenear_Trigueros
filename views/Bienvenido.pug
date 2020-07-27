@@ -6,15 +6,27 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Bienvenido 
-    body
-        a(href='/Inicio') Ir atrás
-        br
-        a BIENVENIDO #{cliente.nombre}
-        BR
-        img(src="https://www.clara.es/medio/2018/12/18/recetas-comidas-saludables_5102de8e_600x900.jpg" width="200" height="341")
-        form(method="post")
-            input(type='submit' value='Menu' name='menu')
-            input(type='submit' value="Armar" name='armar')
+        style.
+            body{
 
-
+                background-image: url("https://www.proximaati.com/-/media/Growing-Families-Version1/GF-ES/Editorial-Contents/Articles/Jolt-Images/platos-vegetarianos-faciles-y-populares-1920x900.jpg");
+                opacity:80
+            }
+            .opacity{
             
+            opacity:0.95; /* Opacidad 60% */
+            
+            }
+    body
+        div(class="jumbotron text-center opacity" )
+            h1(class="display-4") Bienvenido! #{user.nombre}
+            p(class="lead") Que deseas ordenar el día de hoy?
+            hr(class="my-4")
+            img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSBPA-KWVk2znUzyS7z3o3jwFMLuSO1cpSHLw&usqp=CAU" width="400" height="200")
+            p(class="lead")
+                form(method="post")
+                    button(type='submit' class="btn btn-primary btn-lg" value='Ver Menu' name='menu') Ver Menú 
+                    br
+                    br
+                    button(type='submit' class="btn btn-primary btn-lg" value='Ver Armar' name='armar') Armar
+                    //- input( class="btn-primary btn-lg" style='height:50px; width:160px' type='submit' value="Armar Combo" name='armar')

@@ -1,0 +1,43 @@
+include ./layouts/main.pug
+
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Detalles
+    body
+        a(href='/Bienvenido') Ir atrás
+        br
+
+    div(class="jumbotron")
+        h1 Detalles del Pedido
+        BR
+        table(class="table table-hover")
+            thead(class="table-success")
+                th(scope="col") Carbohidratos
+                th(scope="col") Menestras
+                th(scope="col") Proteinas
+                th(scope="col") Grasas
+                th(scope="col") Jugos
+                th(scope="col") Acompañamientos
+                th(scope="col") Direccion
+                th(scope="col") Metodo de Pago
+                th(scope="col") Calorias Totales
+            tbody(class="table-active")
+                each data in b
+                    if c < a
+                        tr(scope="row")
+                            td #{data.carbs}
+                            td #{data.menes}
+                            td #{data.prote}
+                            td #{data.grasa}
+                            td #{data.jugo}
+                            td #{data.acom}
+                            td #{user.direccion}
+                        -c=c+1
+                            
+
+    form(method="post")
+        button(type="submit" class="btn btn-primary btn-lg" value='Enviar Pedido' name='Enviar' ) Enviar Pedido
+            
