@@ -27,13 +27,15 @@ router.get('/signup', (req, res, next) => {
     failureRedirect: '/signin',
     passReqToCallback: true
   }));
-
+  
+  
+  //verifica si el usuario esta autenticado o no 
   router.use((req,res,next) =>{
     isAuthenticated(req,res,next);
     next();
-  })
+  });
 
-  router.get('/profile',isAuthenticated,(req, res, next) => {
+  router.get('/profile',(req, res, next) => {
     res.render('profile');
   });
 

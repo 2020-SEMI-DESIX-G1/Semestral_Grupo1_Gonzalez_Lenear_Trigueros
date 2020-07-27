@@ -16,16 +16,17 @@ body
         button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
             span(class="navbar-toggler-icon")
         div(class="collapse navbar-collapse" id="navbarNav")
-            ul(class="navbar-nav")
-                li.nav-item.active
-                    a.nav-link(href='#') Home 
-                    span.sr-only (current)
-                li.nav-item
-                    a.nav-link(href='#') Features
-                li.nav-item
-                    a.nav-link(href='#') Pricing
-                li.nav-item
-                    a.nav-link.disabled(href='#' tabindex='-1' aria-disabled='true') Disabled
+            ul(class="navbar-nav ml-auto" )
+                if(user)
+                    li.nav-item.active
+                        a.nav-link(href='/profile') Perfil
+                    li.nav-item
+                        a.nav-link(href='logout') Salir
+                else
+                    li.nav-item.active
+                        a.nav-link(href='/signin')  Iniciar Sesión 
+                    li.nav-item
+                        a.nav-link(href='signup') Registrarse
 br
 br
 

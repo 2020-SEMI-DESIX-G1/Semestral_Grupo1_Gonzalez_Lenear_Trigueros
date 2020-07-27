@@ -1,3 +1,11 @@
 include ./layouts/main.pug
 
-a Perfil
+
+
+div(class='card mt-4 text-center')
+    div(class='card-header')
+        h3 Perfil
+    div(class='card card-body')
+        h1 Usuario: #{user.nombre}
+        h1 Direccion: #{user.direccion} 
+        h1 Correo: #{user.email} 

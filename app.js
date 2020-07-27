@@ -39,7 +39,7 @@ app.use(session({
   app.use((req,res,next) => {
     app.locals.mensajedeinicio =  req.flash('mensajedeinicio');
     app.locals.mensajederegistro =  req.flash('mensajeregistro');
-    
+    app.locals.user=req.user;
 
     next();
   });
@@ -53,10 +53,7 @@ app.use('/', require('./router/index'));
 // Controladores - Views
 
 //View de inicio
-app.get('/Inicio', async (req, res) => {
-    const clientes = await Clientes.find().select('nombre edad');
-    res.render('Inicio', { clientes });
-});
+
 
 //View de Pantalla 2 Bienvenidos
 app.get('/Bienvenido/:id', async (req, res) => {

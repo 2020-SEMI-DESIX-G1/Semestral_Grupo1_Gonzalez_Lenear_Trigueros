@@ -6,9 +6,28 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Deli Healthy 
+        style.
+            body{
+
+                background-image: url("https://www.proximaati.com/-/media/Growing-Families-Version1/GF-ES/Editorial-Contents/Articles/Jolt-Images/platos-vegetarianos-faciles-y-populares-1920x900.jpg");
+            }
+       
     body
-    
-    form(action='/signin' method='POST')
-        input(type='email' name='email' placeholder='Email')
-        input(type='password' name='password' placeholder='Password')
-        button(type='submit') Iniciar Sesion Aqui
+    div(class='row')
+        div(class='col-md-4 offset-md-4')
+            div(class='card mt-4 text-center')
+                div(class='card-header')
+                    h3 Iniciar Sesión
+                div(class='card-body')
+                    form(align='center' action='/signin' method='POST')
+                        div(class='form-group')
+                        br
+                        div(class='form-group')
+                            label(for="email") Ingrese su correo :
+                            input(type='email' name='email' placeholder='Email' class='form-control')
+                        br
+                        div(class='form-group')
+                            label(for="password") Ingrese su contraseña : 
+                            input(type='password' name='password' placeholder='Password' class='form-control')
+                        br
+                        button(type='submit' class="btn btn-primary btn-block mt-4") Iniciar Sesión

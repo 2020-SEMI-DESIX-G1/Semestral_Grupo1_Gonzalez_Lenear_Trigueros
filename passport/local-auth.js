@@ -12,13 +12,14 @@ passport.deserializeUser(async (id, done) => {
 });
 
 
-//cuando el usuario se logue utiliza este modulo
+//cuando el usuario se registra utiliza este modulo
 passport.use('local-signup', new LocalStrategy({
     usernameField:'email',
     passwordField:'password',
     passReqToCallback: true
+    
     //el modulo recibe los datos y crea un nuevo usuario
-}, async (req, email, password, done) => {
+}, async (req,email, password,done) => {
     const user = await User.findOne({'email': email})
 
     //Verifica si el correo ya existe en la base de datos 
@@ -28,6 +29,8 @@ passport.use('local-signup', new LocalStrategy({
       const newUser = new User();
       newUser.email = email;
       newUser.password = newUser.encryptPassword(password);
+      newUser.nombre=req.body.nombre;
+      newUser.direccion=req.body.direccion;
       await newUser.save();
       done(null, newUser);
     }
