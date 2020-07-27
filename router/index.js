@@ -15,18 +15,41 @@ router.get('/signup', (req, res, next) => {
   successRedirect:'/profile',
   failureRedirect:'/signup',
   passReqToCallback: true
-})); 
+}));
 
   router.get('/signin', (req, res, next) => {
     res.render('signin');
   });
   
   
-  router.post('/signin',);
+  router.post('/signin', passport.authenticate('local-signin', {
+    successRedirect: '/profile',
+    failureRedirect: '/signin',
+    passReqToCallback: true
+  }));
 
-  router.get('/profile',(req, res, next) => {
+  router.use((req,res,next) =>{
+    isAuthenticated(req,res,next);
+    next();
+  })
+
+  router.get('/profile',isAuthenticated,(req, res, next) => {
     res.render('profile');
   });
+
+  router.get('/logout', (req, res, next) => {
+    req.logout();
+    res.redirect('/');
+  });
+
+  //si el usuario esta autenticado es true y continua con la siguiente ruta, si no, es redicreccionado a la pagina principal
+  function isAuthenticated(req, res, next) {
+    if(req.isAuthenticated()) {
+      return next();
+    }
+  
+    res.redirect('/')
+  }
 
   
 module.exports = router;

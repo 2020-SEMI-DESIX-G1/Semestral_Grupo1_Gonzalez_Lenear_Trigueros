@@ -7,7 +7,7 @@ const app = express();
 const morgan = require('morgan');
 const passport = require('passport');
 const session = require('express-session');
-const flash = require('connect-flash');
+var flash        = require('req-flash');
 
 require('./passport/local-auth');
 const connectDb = require('./dbConfig');
@@ -37,7 +37,10 @@ app.use(session({
   app.use(passport.session());
   
   app.use((req,res,next) => {
-    app.locals.mensajederegistro=  req.flash('Mensaje de Registro');
+    app.locals.mensajedeinicio =  req.flash('mensajedeinicio');
+    app.locals.mensajederegistro =  req.flash('mensajeregistro');
+    
+
     next();
   });
 

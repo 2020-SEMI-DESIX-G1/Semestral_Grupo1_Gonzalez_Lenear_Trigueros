@@ -20,10 +20,10 @@ passport.use('local-signup', new LocalStrategy({
     //el modulo recibe los datos y crea un nuevo usuario
 }, async (req, email, password, done) => {
     const user = await User.findOne({'email': email})
-    console.log(user);
 
+    //Verifica si el correo ya existe en la base de datos 
     if(user){
-      return done(null, false, req.flash('Mensaje de Registro', 'El Email ya a sido registrado.'));
+      return done(null, false, req.flash('mensajeregistro', 'El Email ya a sido registrado.'));
     } else {
       const newUser = new User();
       newUser.email = email;
@@ -32,3 +32,28 @@ passport.use('local-signup', new LocalStrategy({
       done(null, newUser);
     }
   }));
+
+  //autentificacion para iniciar sesion
+  passport.use('local-signin', new LocalStrategy({
+    
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true
+    
+  }, async (req, email, password, done) => {
+    
+    //proseso para ver si el usuario existe o no 
+    const user = await User.findOne({email: email});//buscando un usuario por correo
+    
+    if(!user) {
+      //si no existe se devuelve un error
+      return done(null, false, req.flash('mensajedeinicio', 'El Correo no existe'));
+    }
+    //si el usuario existe se evalua si la contraseña no existe
+    if(!user.comparePassword(password)) {
+      return done(null, false, req.flash('mensajedeinicio', 'Contraseña Incorrecta'));
+    }
+    //si ambas son correctas
+    return done(null, user);
+  }));
+  
