@@ -12,14 +12,14 @@ body
     //-     a(href="/profile") Profile
 
     nav(class="navbar navbar-expand-lg navbar-dark bg-primary")
-        a(class="navbar-brand" href="/Bienvenido") Deli Health
+        a(class="navbar-brand" href="/Bienvenido") Deli Healthy
         button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
             span(class="navbar-toggler-icon")
         div(class="collapse navbar-collapse" id="navbarNav")
             ul(class="navbar-nav ml-auto" )
                 if(user)
                     li.nav-item.active
-                        a.nav-link(href='/profile') Perfil
+                        a.nav-link(href='/profile' ) Perfil
                     li.nav-item
                         a.nav-link(href='logout') Salir
                 else
