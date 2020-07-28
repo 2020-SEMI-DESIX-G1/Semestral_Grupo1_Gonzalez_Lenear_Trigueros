@@ -2,12 +2,18 @@ const express = require('express');
 const router = require('express').Router();
 const passport = require('passport');
 const path = require('path');
+const Stripe = require('stripe');
+const stripe = Stripe('sk_test_51H9gRDLL931ZhLgotFaZVQVGtASx9EnmnuewwmEbbQMWX06TtDUh9NvppsNyAqqTvqSd1PSwJVf9XHesch0dEHqX00yieCGGVl');
+const createPM = require('../payments/createPaymentIntent');
+const acceptInt = require('../payments/createPaymentMethods');
 
 const Users = require('../models/Users');
 const app = express();
 
 const Armado = require('../models/Armado');
 const { find } = require('../models/Users');
+const { userInfo } = require('os');
+const { asociar } = require('../payments/attachesPaymentMethodToaCustomer');
 
 router.get('/', (req, res, next) => {
   res.render('index');
@@ -50,6 +56,7 @@ router.get('/Bienvenido',  (req, res,next) => {
 });
 
 router.get('/Enviado',  (req, res,next) => {
+  acceptInt.crearPayM();
   res.render('Enviado');
 });
 
@@ -57,9 +64,10 @@ router.get('/Armar',  (req, res) => {
   res.render('Armar');
 });
 
-router.get('/Menu', (req, res) => {
+router.get('/Menu', (req, res, next) => {
   res.render('Menu');
 });
+
 let a =0;
 let b;
 let c;
@@ -96,11 +104,27 @@ router.post('/Bienvenido', async (req, res) => {
   if(req.body.armar){
        res.redirect('/Armar');
   }
+}
+
+
+);
+
+router.post('/Menu', async (req,res) => {
+
+  if(req.body.menu1){
+    console.log('holaa');
+    res.redirect('/Menu');
+}
 });
 
 router.post('/Confirmar', (req,res) => {
+
+  createPM.active();
+  
+
 res.redirect('/Enviado');
-});
+}
+);
 
 router.post('/Armar',  (req,res,) => {
     const {carbs,menes,prote,grasa,jugo,acom}=req.body;
