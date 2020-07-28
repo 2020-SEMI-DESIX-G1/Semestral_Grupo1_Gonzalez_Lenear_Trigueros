@@ -1,7 +1,8 @@
 doctype html
 head
   meta(charset='UTF-8')
-  title Deli Health
+  script(src='https://kit.fontawesome.com/0f8125221d.js' crossorigin='anonymous')
+  title Deli Healthy
   link(rel="stylesheet", href="https://bootswatch.com/4/minty/bootstrap.min.css")
 body
     //- if (!user)
@@ -19,7 +20,7 @@ body
             ul(class="navbar-nav ml-auto" )
                 if(user)
                     li.nav-item.active
-                        a.nav-link(href='/profile' ) Perfil
+                        a.nav-link(href='/profile' ) <i class="fas fa-user"></i> Perfil
                     li.nav-item
                         a.nav-link(href='logout') Salir
                 else
