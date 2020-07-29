@@ -24,6 +24,7 @@ app.set('views', './views');
 
 // Intermediarios
 app.use(morgan('dev'));
+app.use(express.static('public'));
 
 
 app.use(express.urlencoded({extended: false}));

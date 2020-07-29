@@ -30,12 +30,19 @@ body
                         a.nav-link(href='signup') <i class="fas fa-user-plus"></i> Registrarse
 br
 br
+footer
 
-div(class='container')
-    if(mensajedeinicio)
-        a(class='alert alert-danger') #{mensajedeinicio}
-        br
-        br
+    div(class='container' align="center")
+        if(mensajedeinicio)
+            div(class="card text-white bg-danger mb-3" style="max-width: 20rem")
+                div(class="card-header") Error
+                div(class="card-body")
+                    h4(class="card-title") #{mensajedeinicio}
+                    p(class="card-text") 
 
-    if(mensajederegistro)
-        a(class='alert alert-danger') #{mensajederegistro}
+        if(mensajederegistro)
+            div(class="card text-white bg-danger mb-3" style="max-width: 20rem")
+                div(class="card-header") Error
+                div(class="card-body")
+                    h4(class="card-title") #{mensajederegistro}
+                    p(class="card-text") 
