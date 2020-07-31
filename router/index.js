@@ -19,11 +19,13 @@ const { userInfo } = require('os');
 const { asociar } = require('../payments/attachesPaymentMethodToaCustomer');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+
 var a1;
 var a2;
 var a3;
 var a4;
 var a5;
+var x=0;
 
 let z2;
 
@@ -81,7 +83,7 @@ router.get('/Armar',  (req, res) => {
   res.render('Armar');
 });
 
-router.get('/Menu', (req, res, next) => {
+router.get('/Menu', async(req, res, next) => {
   res.render('Menu');
 });
 
@@ -98,54 +100,76 @@ router.get('/Confirmar2', async (req,res) => {
   if(b==0)
     {
       a1 = a[4].alimento;
+    
       a2 = a[5].alimento;
+      
       a3 = 'No';
       a4= a[13].alimento;
       a5= a[15].alimento;
+      x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
     }
     if(b==1)
     {
       a1 = a[2].alimento;
       a2 = 'No'
       a3 = a[9].alimento;
-      a4= a[12].alimento;
+      a4= a[13].alimento;
       a5= a[19].alimento;
     }
     if(b==2)
     {
-      a1 = a[0].alimento;
+      a1 = a[1].alimento;
       a2 = a[5].alimento;
-      a3 = a[10].alimento;
-      a4= a[11].alimento;
+      a3 = a[11].alimento;
+      a4= 'No';
       a5= a[18].alimento;
     }
     if(b==3)
     {
-      a1 = a[4].alimento;
-      a2 = a[5].alimento;
-      a3 = 'No';
-      a4= a[13].alimento;
-      a5= a[15].alimento;
+      a1 = a[0].alimento;
+      a2 = 'No';
+      a3 = a[11].alimento;
+      a4= 'No';
+      a5= a[17].alimento;
     }
     if(b==4)
     {
-      a1 = a[4].alimento;
-      a2 = a[5].alimento;
-      a3 = 'No';
-      a4= a[13].alimento;
-      a5= a[15].alimento;
+      a1 = a[3].alimento;
+      a2 = 'No';
+      a3 = a[9].alimento;
+      a4= 'No';
+      a5= a[16].alimento;
     }
     if(b==5)
     {
-      a1 = a[4].alimento;
-      a2 = a[5].alimento;
-      a3 = 'No';
-      a4= a[13].alimento;
+      a1 = a[0].alimento;
+      a2 = 'No';
+      a3 = a[10].alimento;
+      a4= a[12].alimento;
       a5= a[15].alimento;
     }
-  res.render('Confirmar2',{a1,a2,a3,a4,a5});
-  // z2= await createPM.active();
+  res.render('Confirmar2',{a1,a2,a3,a4,a5,x});
+  console.log(user.nombre);
+  z2= await createPM.active();
 });
+
+// router.get('/Confirmar2',  async (req,res,next) => {
+  
+//   async function ar(){
+//     var alimento = await alimentos.find().select();
+//     return alimento;
+//   }
+//   run();
+//   async function run() {
+//     a = await ar();
+//   }
+  
+//   console.log(a);
+//   res.render('Confirmar2',a);
+// //     z2= await createPM.active();
+// }); 
+
+
 
 router.get('/Confirmar',  (req, res) => {
   Armado.find(function (err, data){
@@ -191,7 +215,6 @@ router.post('/Menu',  async (req,res) => {
     }
     else
     if(req.body.menu2){
-      console.log('hola');
       b=1
     }
     if(req.body.menu3){
