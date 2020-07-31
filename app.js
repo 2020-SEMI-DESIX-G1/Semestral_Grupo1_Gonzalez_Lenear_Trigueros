@@ -13,8 +13,6 @@ require('./passport/local-auth');
 const connectDb = require('./dbConfig');
 const Armado = require('./models/Armado');
 const Users = require('./models/Users');
-const alimentos = require('./models/alimentos');
-
 
 const PORT = 3000;
 
@@ -39,10 +37,7 @@ app.use(session({
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.get('/Enviado', async (req, res) => {
-    const alimentoo = await alimentos.find().select('alimentos');
-    res.render('Enviado', { alimentoo });
-});
+  
   
 //Utiliza la rependencia req-flash para enviar valores entre paginas de manera mas facil
   app.use((req,res,next) => {

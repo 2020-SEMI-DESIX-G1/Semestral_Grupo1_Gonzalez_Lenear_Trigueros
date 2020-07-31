@@ -1,10 +1,10 @@
 var stripe = require('stripe')('sk_test_51HA167KRJlA5IRDw9nRzbxW6Omac4spkZm88kl9VbgMTdrgrq6NfAAjcSdXwePeZvtzzpSO0Wdn9URidDLFKHd4B00QJIiNl8x');
 var xx ;
 
-async function active(){
+async function active(xxx){
   const customerss = await stripe.customers.create(
     {
-      description: 'My First Test Customer (created for API docs)',
+      description: xxx,
     }
   );
     console.log('Customers:',customerss.id);
