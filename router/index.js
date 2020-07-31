@@ -191,7 +191,6 @@ router.post('/Menu',  async (req,res) => {
     }
     else
     if(req.body.menu2){
-      console.log('hola');
       b=1
     }
     if(req.body.menu3){
