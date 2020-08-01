@@ -1,36 +1,44 @@
-const express = require('express');
-const app = express();
-const router = require('express').Router();
-const passport = require('passport');
-const path = require('path');
+//Constantes utilizadas para Stripe
 const Stripe = require('stripe');
 const stripe = Stripe('sk_test_51HA167KRJlA5IRDw9nRzbxW6Omac4spkZm88kl9VbgMTdrgrq6NfAAjcSdXwePeZvtzzpSO0Wdn9URidDLFKHd4B00QJIiNl8x');
 const createPM = require('../payments/createPaymentIntent');
 const acceptInt = require('../payments/PaymentIntentAccept');
+
+///////////////////////////////////////
+const express = require('express');
+const app = express();
+const router = require('express').Router();
+
+const passport = require('passport');
 const bodyParser = require('body-parser');
+const path = require('path');
+const { find } = require('../models/Users');
+const { userInfo } = require('os');
+const { asociar } = require('../payments/attachesPaymentMethodToaCustomer');
 
 
+// require para la Base de Datos
 const Users = require('../models/Users');
 const Armado = require('../models/Armado');
 const alimentos = require('../models/alimentos');
 
-const { find } = require('../models/Users');
-const { userInfo } = require('os');
-const { asociar } = require('../payments/attachesPaymentMethodToaCustomer');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
-var a1;
-var a2;
-var a3;
-var a4;
-var a5;
-var x=0;
+//Variables para la tabla de detalles de la vista Enviar Pedido
+let a1;
+let a2;
+let a3;
+let a4;
+let a5;
+let x=0;
 
-let z2;
+//Variable que contiene el PaymentID
+let payid;
 
 
-let a =0;
+let a=0;
 let b;
 let c;
 
@@ -149,14 +157,13 @@ router.get('/Confirmar2', async (req,res) => {
       a5= a[15].alimento;
     }
   res.render('Confirmar2',{a1,a2,a3,a4,a5,x});
-  console.log(user.nombre);
-  z2= await createPM.active();
+  payid= await createPM.active();
 });
 
 // router.get('/Confirmar2',  async (req,res,next) => {
   
 //   async function ar(){
-//     var alimento = await alimentos.find().select();
+//     let alimento = await alimentos.find().select();
 //     return alimento;
 //   }
 //   run();
@@ -166,7 +173,7 @@ router.get('/Confirmar2', async (req,res) => {
   
 //   console.log(a);
 //   res.render('Confirmar2',a);
-// //     z2= await createPM.active();
+// //     payid= await createPM.active();
 // }); 
 
 
@@ -239,8 +246,8 @@ router.post('/Confirmar', (req,res) => {
 });
 
 router.post('/Confirmar2', async (req,res) => {
-  console.log(z2);
-  await createPM.accept(z2);
+  console.log(payid);
+  await createPM.accept(payid);
   res.redirect('/Enviado');
 });
 

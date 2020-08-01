@@ -1,21 +1,21 @@
 require('dotenv').config()
-
+require('./passport/local-auth');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const morgan = require('morgan');
+//passport permite hacer la autentificacion y validacion 
 const passport = require('passport');
 const session = require('express-session');
-var flash        = require('req-flash');
+//nos permite enviar mensaje entre paginas 
+var flash = require('req-flash');
 
-require('./passport/local-auth');
+//conexion a la base de datos(constantes)
 const connectDb = require('./dbConfig');
 const Armado = require('./models/Armado');
 const Users = require('./models/Users');
-
 const PORT = 3000;
-
 
 // Configuracion
 app.set('view engine', 'pug');
@@ -54,8 +54,6 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use('/cont', express.static(path.join(__dirname, 'cont')));
-
-
 
 //require donde se encuentran todas las rutas
 app.use('/', require('./router/index'));
