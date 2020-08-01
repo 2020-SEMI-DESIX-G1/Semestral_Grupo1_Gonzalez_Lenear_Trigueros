@@ -8,6 +8,7 @@ const schema2 = new mongoose.Schema({
   direccion: {type: String}
 });
 
+
 schema2.methods.encryptPassword =  (password) => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(2));
 }

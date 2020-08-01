@@ -37,7 +37,6 @@ let x=0;
 let x1=0;
 let x2=0;
 let x3=0;
-let x4=0;
 let precio;
 
 //Variable que contiene el PaymentID
@@ -117,71 +116,106 @@ router.get('/Confirmar2', async (req,res) => {
     {
       precio = 1050;
       x=0;
-      a1 = a[4].alimento;
-    
+      x1=0;
+      x2=0;
+      x3=0;
+      a1 = a[4].alimento; 
       a2 = a[8].alimento;
       
       a3 = 'No';
       a4= a[13].alimento;
       a5= a[15].alimento;
       x = x + a[4].cal + a[8].cal + a[13].cal +a[15].cal;
+      x1 = x1 + a[4].carbs + a[8].carbs + a[13].carbs +a[15].carbs;
+      x2 = x2 + a[4].grasa + a[8].grasa + a[13].grasa +a[15].grasa;
+      x3 = x3 + a[4].proteina + a[8].proteina + a[13].proteina +a[15].proteina;
     }
     if(b==1)
     {
       precio = 700;
       x=0;
+      x1=0;
+      x2=0;
+      x3=0;
       a1 = a[5].alimento;
       a2 = 'No'
       a3 = a[9].alimento;
       a4= a[13].alimento;
       a5= a[19].alimento;
-      x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
+      x = x + a[5].cal + a[9].cal + a[13].cal +a[19].cal;
+      x1 = x1 + a[5].carbs + a[9].crabs + a[13].carbs +a[19].carbs;
+      x2 = x2 + a[5].grasa + a[9].grasa + a[13].grasa +a[19].grasa;
+      x3 = x3 + a[5].proteina + a[9].proteina + a[13].proteina +a[19].proteina;
     }
     if(b==2)
     {
       precio =1450;
       x=0;
+      x1=0;
+      x2=0;
+      x3=0;
       a1 = a[20].alimento;
       a2 = 'No'
       a3 = 'No'
       a4= a[2].alimento;
       a5= a[18].alimento;
-      x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
+      x = x + a[20].cal + a[2].cal + a[18].cal;
+      x1 = x1 + a[20].carbs + a[2].crabs + a[18].carbs ;
+      x2 = x2 + a[20].grasa + a[2].grasa + a[18].grasa ;
+      x3 = x3 + a[20].proteina + a[2].proteina + a[18].proteina;
     }
     if(b==3)
     {
       precio = 1080;
       x=0;
+      x1=0;
+      x2=0;
+      x3=0;
       a1 = a[21].alimento;
       a2 = 'No';
       a3 = a[11].alimento;
       a4= 'No';
       a5= a[17].alimento;
-      x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
+      x = x + a[21].cal + a[11].cal + a[17].cal;
+      x1 = x1 + a[21].carbs + a[11].crabs + a[17].carbs;
+      x2 = x2 + a[21].grasa + a[11].grasa + a[17].grasa;
+      x3 = x3 + a[21].proteina + a[11].proteina + a[17].proteina;
     }
     if(b==4)
     {
       precio = 0900;
       x=0;
+      x1=0;
+      x2=0;
+      x3=0;
       a1 = a[3].alimento;
       a2 = 'No';
       a3 = a[9].alimento;
       a4= 'No';
       a5= a[16].alimento;
-      x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
+      x = x + a[16].cal + a[9].cal + a[3].cal;
+      x1 = x1 + a[16].carbs + a[9].crabs + a[3].carbs;
+      x2 = x2 + a[16].grasa + a[9].grasa + a[3].grasa;
+      x3 = x3 + a[16].proteina + a[9].proteina + a[3].proteina;
     }
     if(b==5)
     {
       precio = 0890;
       x=0;
+      x1=0;
+      x2=0;
+      x3=0;
       a1 = a[0].alimento;
       a2 = 'No';
       a3 = a[10].alimento;
       a4= a[12].alimento;
       a5= a[15].alimento;
-      x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
+      x = x + a[0].cal + a[10].cal + a[12].cal +a[15].cal;
+      x1 = x1 + a[0].carbs + a[10].crabs + a[12].carbs +a[15].carbs;
+      x2 = x2 + a[0].grasa + a[10].grasa + a[12].grasa +a[15].grasa;
+      x3 = x3 + a[0].proteina + a[10].proteina + a[12].proteina +a[15].proteina;
     }
-  res.render('Confirmar2',{a1,a2,a3,a4,a5,x,precio});
+  res.render('Confirmar2',{a1,a2,a3,a4,a5,x,x1,x2,x3,precio});
   // dataBaseUSER.dataBaseUSER().then()
   payid= await createPM.active(precio,a1);
 });
