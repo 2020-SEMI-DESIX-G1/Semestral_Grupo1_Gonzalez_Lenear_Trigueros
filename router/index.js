@@ -99,9 +99,10 @@ router.get('/Confirmar2', async (req,res) => {
   })
   if(b==0)
     {
+      x=0;
       a1 = a[4].alimento;
     
-      a2 = a[5].alimento;
+      a2 = a[8].alimento;
       
       a3 = 'No';
       a4= a[13].alimento;
@@ -110,43 +111,53 @@ router.get('/Confirmar2', async (req,res) => {
     }
     if(b==1)
     {
-      a1 = a[2].alimento;
+      x=0;
+      a1 = a[5].alimento;
       a2 = 'No'
       a3 = a[9].alimento;
       a4= a[13].alimento;
       a5= a[19].alimento;
+      x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
     }
     if(b==2)
     {
-      a1 = a[1].alimento;
-      a2 = a[5].alimento;
-      a3 = a[11].alimento;
-      a4= 'No';
+      x=0;
+      a1 = a[20].alimento;
+      a2 = 'No'
+      a3 = '-'
+      a4= a[2].alimento;
       a5= a[18].alimento;
+      x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
     }
     if(b==3)
     {
-      a1 = a[0].alimento;
+      x=0;
+      a1 = a[21].alimento;
       a2 = 'No';
       a3 = a[11].alimento;
       a4= 'No';
       a5= a[17].alimento;
+      x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
     }
     if(b==4)
     {
+      x=0;
       a1 = a[3].alimento;
       a2 = 'No';
       a3 = a[9].alimento;
       a4= 'No';
       a5= a[16].alimento;
+      x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
     }
     if(b==5)
     {
+      x=0;
       a1 = a[0].alimento;
       a2 = 'No';
       a3 = a[10].alimento;
       a4= a[12].alimento;
       a5= a[15].alimento;
+      x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
     }
   res.render('Confirmar2',{a1,a2,a3,a4,a5,x});
   console.log(user.nombre);

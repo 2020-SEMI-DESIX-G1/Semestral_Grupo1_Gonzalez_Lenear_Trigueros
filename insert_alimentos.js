@@ -159,7 +159,7 @@ db.alimentos.insertMany([
     proteina: 45.2,
     precio: 1.5
 },
-])
+{
  alimento: "Salmon",
     cal: 249,
     carbs: 21.2,
