@@ -1,5 +1,5 @@
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;//Utilizamos el metodo de autenticacion Strategy de passport-local
 const User = require('../models/Users');
 
 passport.serializeUser((user, done) => {
@@ -16,7 +16,7 @@ passport.deserializeUser(async (id, done) => {
 passport.use('local-signup', new LocalStrategy({
     usernameField:'email',
     passwordField:'password',
-    passReqToCallback: true
+    passReqToCallback: true //permite recibir datos request 
     
     //el modulo recibe los datos y crea un nuevo usuario
 }, async (req,email, password,done) => {
