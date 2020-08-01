@@ -2,22 +2,20 @@ require('dotenv').config()
 require('./passport/local-auth');
 const path = require('path');
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const app = express();
-const morgan = require('morgan');
-//passport permite hacer la autentificacion y validacion 
-const passport = require('passport');
-const session = require('express-session');
-//nos permite enviar mensaje entre paginas 
-var flash = require('req-flash');
+const morgan = require('morgan'); //Morgan para ver las peticiones http que llegan al servidor
+const passport = require('passport'); //passport permite hacer la autentificacion y validacion 
+var flash = require('req-flash'); //nos permite enviar mensaje entre paginas 
 
-//conexion a la base de datos(constantes)
+//Base de datos
 const connectDb = require('./dbConfig');
 const Armado = require('./models/Armado');
 const Users = require('./models/Users');
 const PORT = 3000;
 
-// Configuracion
+// Configuracion de las vistas
 app.set('view engine', 'pug');
 app.set('views', './views');
 
@@ -27,7 +25,7 @@ app.use(morgan('dev'));
 app.use(express.static('public'));
 
 
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: false}));//recibir datos desde el cliente,extend:false declara que no se van a recibir datos de gran tamaño
 app.use(session({
     secret: 'hola2secreto',
     resave: false,
@@ -39,7 +37,7 @@ app.use(session({
 
   
   
-//Utiliza la rependencia req-flash para enviar valores entre paginas de manera mas facil
+//Utiliza la dependencia req-flash para enviar valores entre paginas de manera mas facil
   app.use((req,res,next) => {
 
     //envia un mensaje de error si algun valor en el inicio de sesion es incorrecto

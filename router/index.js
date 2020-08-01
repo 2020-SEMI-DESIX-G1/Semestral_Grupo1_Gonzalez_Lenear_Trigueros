@@ -34,6 +34,10 @@ let a3;
 let a4;
 let a5;
 let x=0;
+let x1=0;
+let x2=0;
+let x3=0;
+let x4=0;
 let precio;
 
 //Variable que contiene el PaymentID
