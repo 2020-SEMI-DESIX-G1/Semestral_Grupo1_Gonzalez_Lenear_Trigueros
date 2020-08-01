@@ -88,7 +88,7 @@ db.alimentos.insertMany([
     precio: 1.8
 },
 {
-    alimento: "Pezcado apanado",
+    alimento: "Pescado apanado",
     cal: 249,
     carbs: 21.2,
     grasa: 13.3,
@@ -158,5 +158,13 @@ db.alimentos.insertMany([
     grasa: 0.4,
     proteina: 45.2,
     precio: 1.5
+},
+])
+ alimento: "Salmon",
+    cal: 249,
+    carbs: 21.2,
+    grasa: 12.3,
+    proteina: 11,
+    precio: 3
 },
 ])
