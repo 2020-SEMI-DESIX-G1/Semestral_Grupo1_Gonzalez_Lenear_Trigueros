@@ -7,7 +7,7 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Detalles
     body
-        a(href='/Bienvenido') Ir atrás
+        
         br
 
     div(class="jumbotron")
@@ -20,8 +20,8 @@ html(lang="en")
                 th(scope="col") Carnes
                 th(scope="col") Acompañamiento
                 th(scope="col") Jugos
-                th(scope="col") <i class="fas fa-compass"></i> Dirección
-                th(scope="col") <i class="fas fa-money-check-alt"></i>Método de Pago
+                th(scope="col") <i class="fas fa-compass"> </i> Dirección
+                th(scope="col") <i class="fas fa-money-check-alt"> </i>Método de Pago
                 th(scope="col") Calorías Totales
             tbody(class="table-active")
                 tr(scope="row")
@@ -33,6 +33,7 @@ html(lang="en")
                     td #{user.direccion}
                     td Visa
                     td #{x} cal
+        a(href='/Menu') Ir atrás
 
     form(method="post")
         button(type="submit" class="btn btn-primary btn-lg" value='Enviar Pedido' name='Enviar' ) Enviar Pedido

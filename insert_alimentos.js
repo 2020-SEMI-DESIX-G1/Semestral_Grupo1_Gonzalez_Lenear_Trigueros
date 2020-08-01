@@ -32,7 +32,7 @@ db.alimentos.insertMany([
     precio: 0.6
 },
 {
-    alimento: "Quinoa",
+    alimento: "Pimientos con Quinoa",
     cal: 306,
     carbs: 49.2,
     grasa: 5.5,
@@ -40,11 +40,11 @@ db.alimentos.insertMany([
     precio: 0.5
 },
 {
-    alimento: "Ensalada de Verduras",
-    cal: 16,
-    carbs: 3.2,
+    alimento: "Huevos revueltos",
+    cal:  212,
+    carbs: 16.2,
     grasa: 0.1,
-    proteina: 1.3,
+    proteina:  13.8,
     precio: 0.4
 },
 {
@@ -159,9 +159,17 @@ db.alimentos.insertMany([
     proteina: 45.2,
     precio: 1.5
 },
-])
+{
  alimento: "Salmon",
     cal: 249,
+    carbs: 21.2,
+    grasa: 12.3,
+    proteina: 11,
+    precio: 3
+},
+{
+ alimento: "Sushi",
+    cal: 357,
     carbs: 21.2,
     grasa: 12.3,
     proteina: 11,
