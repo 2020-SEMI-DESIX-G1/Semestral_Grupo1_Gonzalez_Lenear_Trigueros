@@ -1,11 +1,8 @@
-var stripe = require('stripe')('sk_test_51HA167KRJlA5IRDw9nRzbxW6Omac4spkZm88kl9VbgMTdrgrq6NfAAjcSdXwePeZvtzzpSO0Wdn9URidDLFKHd4B00QJIiNl8x');
-var xx ;
+var stripe = require('stripe')('sk_test_51HBDHNJRW1JL8d9KIaHQ2rSR9HQuUwCNvYaK9idu6Cd0rjL0eo8UJDqoMVHq9CMGI6GWxzeE6kqBeXCfHPK2QTCo00EcHgGMWU');
 
-async function active(xxx){
+
+async function active(xx,plato){
   const customerss = await stripe.customers.create(
-    {
-      description: xxx,
-    }
   );
     console.log('Customers:',customerss.id);
         
@@ -30,11 +27,12 @@ async function active(xxx){
 
   const paymentIntent = await stripe.paymentIntents.create(
     {
-    amount: 2000,
+    amount: xx,
     currency: 'usd',
     payment_method_types: ['card'],
     customer: customerss.id,
-    payment_method: paymentMethod.id
+    payment_method: paymentMethod.id,
+    description: plato
     }
   );
   console.log('PaymentIntent: ',paymentIntent.id);

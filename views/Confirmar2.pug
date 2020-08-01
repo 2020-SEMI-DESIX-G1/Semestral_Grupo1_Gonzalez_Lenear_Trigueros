@@ -20,9 +20,11 @@ html(lang="en")
                 th(scope="col") Carnes
                 th(scope="col") Acompañamiento
                 th(scope="col") Jugos
+                th(scope="col") Calorías Totales
                 th(scope="col") <i class="fas fa-compass"> </i> Dirección
                 th(scope="col") <i class="fas fa-money-check-alt"> </i>Método de Pago
-                th(scope="col") Calorías Totales
+                th(scope="col") Precio
+                
             tbody(class="table-active")
                 tr(scope="row")
                     td #{a1}
@@ -30,9 +32,11 @@ html(lang="en")
                     td #{a3}
                     td #{a4}
                     td #{a5}
+                    td #{x} cal
                     td #{user.direccion}
                     td Visa
-                    td #{x} cal
+                    td #{precio}
+                    
         a(href='/Menu') Ir atrás
 
     form(method="post")

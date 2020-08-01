@@ -1,7 +1,8 @@
 //Constantes utilizadas para Stripe
 const Stripe = require('stripe');
-const stripe = Stripe('sk_test_51HA167KRJlA5IRDw9nRzbxW6Omac4spkZm88kl9VbgMTdrgrq6NfAAjcSdXwePeZvtzzpSO0Wdn9URidDLFKHd4B00QJIiNl8x');
+const stripe = Stripe('sk_test_51HBDHNJRW1JL8d9KIaHQ2rSR9HQuUwCNvYaK9idu6Cd0rjL0eo8UJDqoMVHq9CMGI6GWxzeE6kqBeXCfHPK2QTCo00EcHgGMWU');
 const createPM = require('../payments/createPaymentIntent');
+const dataBaseUSER = require('./DB');
 const acceptInt = require('../payments/PaymentIntentAccept');
 
 ///////////////////////////////////////
@@ -14,7 +15,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const { find } = require('../models/Users');
 const { userInfo } = require('os');
-const { asociar } = require('../payments/attachesPaymentMethodToaCustomer');
+
 
 
 // require para la Base de Datos
@@ -33,9 +34,11 @@ let a3;
 let a4;
 let a5;
 let x=0;
+let precio;
 
 //Variable que contiene el PaymentID
 let payid;
+let username;
 
 
 let a=0;
@@ -80,6 +83,7 @@ router.use((req,res,next) =>{
 
 //GET--------------------------------------------------------------------------------------------->
 router.get('/Bienvenido',  (req, res,next) => {
+
   res.render('Bienvenido');
 });
 
@@ -107,6 +111,7 @@ router.get('/Confirmar2', async (req,res) => {
   })
   if(b==0)
     {
+      precio = 1050;
       x=0;
       a1 = a[4].alimento;
     
@@ -115,10 +120,11 @@ router.get('/Confirmar2', async (req,res) => {
       a3 = 'No';
       a4= a[13].alimento;
       a5= a[15].alimento;
-      x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
+      x = x + a[4].cal + a[8].cal + a[13].cal +a[15].cal;
     }
     if(b==1)
     {
+      precio = 700;
       x=0;
       a1 = a[5].alimento;
       a2 = 'No'
@@ -129,16 +135,18 @@ router.get('/Confirmar2', async (req,res) => {
     }
     if(b==2)
     {
+      precio =1450;
       x=0;
       a1 = a[20].alimento;
       a2 = 'No'
-      a3 = '-'
+      a3 = 'No'
       a4= a[2].alimento;
       a5= a[18].alimento;
       x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
     }
     if(b==3)
     {
+      precio = 1080;
       x=0;
       a1 = a[21].alimento;
       a2 = 'No';
@@ -149,6 +157,7 @@ router.get('/Confirmar2', async (req,res) => {
     }
     if(b==4)
     {
+      precio = 0900;
       x=0;
       a1 = a[3].alimento;
       a2 = 'No';
@@ -159,6 +168,7 @@ router.get('/Confirmar2', async (req,res) => {
     }
     if(b==5)
     {
+      precio = 0890;
       x=0;
       a1 = a[0].alimento;
       a2 = 'No';
@@ -167,26 +177,10 @@ router.get('/Confirmar2', async (req,res) => {
       a5= a[15].alimento;
       x = x + a[4].cal + a[5].cal + a[13].cal +a[15].cal;
     }
-  res.render('Confirmar2',{a1,a2,a3,a4,a5,x});
-  payid= await createPM.active();
+  res.render('Confirmar2',{a1,a2,a3,a4,a5,x,precio});
+  // dataBaseUSER.dataBaseUSER().then()
+  payid= await createPM.active(precio,a1);
 });
-
-// router.get('/Confirmar2',  async (req,res,next) => {
-  
-//   async function ar(){
-//     let alimento = await alimentos.find().select();
-//     return alimento;
-//   }
-//   run();
-//   async function run() {
-//     a = await ar();
-//   }
-  
-//   console.log(a);
-//   res.render('Confirmar2',a);
-// //     payid= await createPM.active();
-// }); 
-
 
 
 router.get('/Confirmar',  (req, res) => {
@@ -257,7 +251,6 @@ router.post('/Confirmar', (req,res) => {
 });
 
 router.post('/Confirmar2', async (req,res) => {
-  console.log(payid);
   await createPM.accept(payid);
   res.redirect('/Enviado');
 });
