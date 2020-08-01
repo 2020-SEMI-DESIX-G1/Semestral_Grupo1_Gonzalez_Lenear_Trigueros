@@ -24,10 +24,12 @@ html(lang="en")
                 a(id='nombre') #{user.nombre}
             p(class="lead") Qué deseas ordenar el día de hoy?
             hr(class="my-4")
-            img(src="https://media0.giphy.com/media/jTqnkqm3Ms3c99fNt0/giphy.gif" width="400" height="300")
+            
             p(class="lead")
                 form(method="post")
                     button(type='submit' class="btn btn-primary btn-lg" value='Ver Menu' name='menu') Ver menú 
+                    br
+                    img(src="https://media0.giphy.com/media/jTqnkqm3Ms3c99fNt0/giphy.gif" width="400" height="300")
                     br
                     br
                     button(type='submit' class="btn btn-primary btn-lg" value='Ver Armar' name='armar' disabled) Armar combo
