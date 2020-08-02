@@ -2,8 +2,6 @@
 const Stripe = require('stripe');
 const stripe = Stripe('sk_test_51HBDHNJRW1JL8d9KIaHQ2rSR9HQuUwCNvYaK9idu6Cd0rjL0eo8UJDqoMVHq9CMGI6GWxzeE6kqBeXCfHPK2QTCo00EcHgGMWU');
 const createPM = require('../payments/createPaymentIntent');
-const dataBaseUSER = require('./DB');
-const acceptInt = require('../payments/PaymentIntentAccept');
 
 ///////////////////////////////////////
 const express = require('express');
@@ -13,6 +11,7 @@ const router = require('express').Router();
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const path = require('path');
+
 const { find } = require('../models/Users');
 const { userInfo } = require('os');
 
@@ -20,7 +19,6 @@ const { userInfo } = require('os');
 
 // require para la Base de Datos
 const Users = require('../models/Users');
-const Armado = require('../models/Armado');
 const alimentos = require('../models/alimentos');
 
 
@@ -41,13 +39,14 @@ let precio;
 
 //Variable que contiene el PaymentID
 let payid;
-let username;
 
 
 let a=0;
 let b;
-let c;
+// let c;
 
+
+//GET DE INICIO
 router.get('/', (req, res, next) => {
   res.render('index');
 });
@@ -94,9 +93,9 @@ router.get('/Enviado',  (req, res,next) => {
   res.render('Enviado');
 });
 
-router.get('/Armar',  (req, res) => {
-  res.render('Armar');
-});
+// router.get('/Armar',  (req, res) => {
+//   res.render('Armar');
+// });
 
 router.get('/Menu', async(req, res, next) => {
   res.render('Menu');
@@ -119,12 +118,13 @@ router.get('/Confirmar2', async (req,res) => {
       x1=0;
       x2=0;
       x3=0;
+      
       a1 = a[4].alimento; 
       a2 = a[8].alimento;
-      
       a3 = 'No';
       a4= a[13].alimento;
       a5= a[15].alimento;
+
       x = x + a[4].cal + a[8].cal + a[13].cal +a[15].cal;
       x1 = x1 + a[4].carbs + a[8].carbs + a[13].carbs +a[15].carbs;
       x2 = x2 + a[4].grasa + a[8].grasa + a[13].grasa +a[15].grasa;
@@ -143,7 +143,7 @@ router.get('/Confirmar2', async (req,res) => {
       a4= a[13].alimento;
       a5= a[19].alimento;
       x = x + a[5].cal + a[9].cal + a[13].cal +a[19].cal;
-      x1 = x1 + a[5].carbs + a[9].crabs + a[13].carbs +a[19].carbs;
+      x1 = x1 + a[5].carbs + a[9].carbs + a[13].carbs +a[19].carbs;
       x2 = x2 + a[5].grasa + a[9].grasa + a[13].grasa +a[19].grasa;
       x3 = x3 + a[5].proteina + a[9].proteina + a[13].proteina +a[19].proteina;
     }
@@ -160,7 +160,7 @@ router.get('/Confirmar2', async (req,res) => {
       a4= a[2].alimento;
       a5= a[18].alimento;
       x = x + a[20].cal + a[2].cal + a[18].cal;
-      x1 = x1 + a[20].carbs + a[2].crabs + a[18].carbs ;
+      x1 = x1 + a[20].carbs + a[2].carbs + a[18].carbs ;
       x2 = x2 + a[20].grasa + a[2].grasa + a[18].grasa ;
       x3 = x3 + a[20].proteina + a[2].proteina + a[18].proteina;
     }
@@ -177,7 +177,7 @@ router.get('/Confirmar2', async (req,res) => {
       a4= 'No';
       a5= a[17].alimento;
       x = x + a[21].cal + a[11].cal + a[17].cal;
-      x1 = x1 + a[21].carbs + a[11].crabs + a[17].carbs;
+      x1 = x1 + a[21].carbs + a[11].carbs + a[17].carbs;
       x2 = x2 + a[21].grasa + a[11].grasa + a[17].grasa;
       x3 = x3 + a[21].proteina + a[11].proteina + a[17].proteina;
     }
@@ -194,7 +194,7 @@ router.get('/Confirmar2', async (req,res) => {
       a4= 'No';
       a5= a[16].alimento;
       x = x + a[16].cal + a[9].cal + a[3].cal;
-      x1 = x1 + a[16].carbs + a[9].crabs + a[3].carbs;
+      x1 = x1 + a[16].carbs + a[9].carbs + a[3].carbs;
       x2 = x2 + a[16].grasa + a[9].grasa + a[3].grasa;
       x3 = x3 + a[16].proteina + a[9].proteina + a[3].proteina;
     }
@@ -211,7 +211,7 @@ router.get('/Confirmar2', async (req,res) => {
       a4= a[12].alimento;
       a5= a[15].alimento;
       x = x + a[0].cal + a[10].cal + a[12].cal +a[15].cal;
-      x1 = x1 + a[0].carbs + a[10].crabs + a[12].carbs +a[15].carbs;
+      x1 = x1 + a[0].carbs + a[10].carbs + a[12].carbs +a[15].carbs;
       x2 = x2 + a[0].grasa + a[10].grasa + a[12].grasa +a[15].grasa;
       x3 = x3 + a[0].proteina + a[10].proteina + a[12].proteina +a[15].proteina;
     }
@@ -221,20 +221,20 @@ router.get('/Confirmar2', async (req,res) => {
 });
 
 
-router.get('/Confirmar',  (req, res) => {
-  Armado.find(function (err, data){
-    if(err){
-      return console.log(err);
-    }
-    if(data === null){
-      console.log('no hay datos')
-    }
-    a =data.length;
-    b=data;
-    c=a-1;
-  })
-res.render('Confirmar', {b,a,c});
-});
+// router.get('/Confirmar',  (req, res) => {
+//   Armado.find(function (err, data){
+//     if(err){
+//       return console.log(err);
+//     }
+//     if(data === null){
+//       console.log('no hay datos')
+//     }
+//     a =data.length;
+//     b=data;
+//     c=a-1;
+//   })
+// res.render('Confirmar', {b,a,c});
+// });
 
 router.get('/profile',(req, res, next) => {
   res.render('profile');
@@ -283,21 +283,21 @@ router.post('/Menu',  async (req,res) => {
 // }
 });
 
-router.post('/Confirmar', (req,res) => {
+// router.post('/Confirmar', (req,res) => {
 
-  res.redirect('/Enviado');
-});
+//   res.redirect('/Enviado');
+// });
 
 router.post('/Confirmar2', async (req,res) => {
   await createPM.accept(payid);
   res.redirect('/Enviado');
 });
 
-router.post('/Armar',  (req,res,) => {
-    const {carbs,menes,prote,grasa,jugo,acom}=req.body;
-    Armado.create({carbs,menes,prote,grasa,jugo,acom});
-    res.redirect('/Confirmar');
-});
+// router.post('/Armar',  (req,res,) => {
+//     const {carbs,menes,prote,grasa,jugo,acom}=req.body;
+//     Armado.create({carbs,menes,prote,grasa,jugo,acom});
+//     res.redirect('/Confirmar');
+// });
 
   //si el usuario esta autenticado es true y continua con la siguiente ruta, si no, es redicreccionado a la pagina principal
   function isAuthenticated(req, res, next) {

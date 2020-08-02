@@ -11,7 +11,6 @@ var flash = require('req-flash'); //nos permite enviar mensaje entre paginas
 
 //Base de datos
 const connectDb = require('./dbConfig');
-const Armado = require('./models/Armado');
 const Users = require('./models/Users');
 const PORT = 3000;
 
@@ -51,6 +50,7 @@ app.use(session({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+
 app.use('/cont', express.static(path.join(__dirname, 'cont')));
 
 //require donde se encuentran todas las rutas

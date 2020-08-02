@@ -9,7 +9,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
     const user = await User.findById(id);
     done(null, user);
-});
+});/////////////////////
 
 
 //cuando el usuario se registra utiliza este modulo
